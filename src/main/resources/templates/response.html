@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Query</title>
+</head>
+
+<body>
+    <div id="query-results" th:fragment="result">
+        <div class="card my-4 flex flex-col gap-2" th:if="${query != null and #strings.length(query) > 0}">
+            <div class="flex gap-2">
+                <span class="badge badge-blue" >User: </span>
+                <article  th:text="${query}"></article>    
+            </div>
+            <div class="flex gap-2 items-center">
+                <span class="badge badge-pink">AI: </span>
+                <article th:utext="${chat}"></article>
+            </div>  
+        </div>
+    </div>
+
+</body>
+
+</html>

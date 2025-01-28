@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Htmx Demo</title>
+       <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+       <script src="https://cdn.tailwindcss.com"></script>
+       <script src="https://unpkg.com/htmx-ext-sse@2.2.2/sse.js"></script>
+       <style type="text/tailwindcss">
+        @layer components {
+
+            h1 {
+                @apply text-3xl font-semibold py-2;
+            }
+
+            h2 {
+                @apply text-2xl font-semibold py-3;
+            }
+
+            h3 {
+                @apply text-xl font-semibold py-2;
+            }
+
+            h4 {
+                @apply text-lg font-semibold py-2;
+            }
+
+            a[role="button"] {
+                @apply btn btn-secondary hover:no-underline;
+            }
+
+            a[role="nav"] {
+                @apply nav-link;
+            }
+
+            a:not([role="button"],
+            [role="nav"]) {
+                @apply link;
+            }
+
+            table {
+                @apply w-full text-sm text-left rtl:text-right text-gray-500;
+            }
+
+            /* child selector > */
+            table>thead {
+                @apply text-xs text-gray-700 uppercase bg-gray-50;
+            }
+
+            table>thead>tr>th {
+                @apply px-6 py-3;
+            }
+
+            table>tbody>tr {
+                @apply bg-white border-b;
+            }
+
+            table>tbody>tr>td {
+                @apply px-6 py-3;
+            }
+
+            /* descendant selector */
+            form label {
+                @apply block mb-2 text-sm font-medium uppercase text-gray-900 dark:text-white;
+            }
+
+            form input,
+            textarea,
+            select {
+                @apply bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+            }
+
+            form input[type=file] {
+                @apply file:mr-2 file:py-2 file:px-3 file:rounded-l-md file:border-0 file:text-sm file:font-semibold hover:file:cursor-pointer hover:file:opacity-80 file:bg-gray-900 file:text-white;
+            }
+
+            /* button:not([role="link"]) {
+                @apply btn btn-primary;
+            } */
+
+            button[role="primary"] {
+                @apply btn btn-primary;
+            }
+
+            button[role="secondary"] {
+                @apply btn btn-secondary;
+            }
+
+            button[role="danger"] {
+                @apply btn btn-danger;
+            }
+
+            button[role="link"] {
+                @apply link;
+            }
+
+            ul {
+                @apply w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg;
+            }
+
+            ul>li {
+                @apply w-full px-4 py-2 border-b border-gray-200 rounded-t-lg;
+            }
+
+            table {
+                @apply w-full text-sm text-left text-gray-500;
+            }
+
+            thead {
+                @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700;
+            }
+
+            th,
+            td {
+                @apply px-6 py-3;
+            }
+
+            dl {
+                @apply flex border-b border-slate-200 sm:py-2 md:py-3 rounded-md;
+            }
+
+            dl>dt {
+                @apply font-bold text-black dark:text-white mr-5;
+            }
+
+            dl>dd {
+                @apply text-slate-500 dark:text-slate-100 mr-5;
+            }
+
+            .link {
+                @apply font-medium text-gray-700 hover:text-gray-900 hover:font-semibold hover:underline hover:cursor-pointer;
+            }
+
+            .nav-link {
+                @apply transition-colors duration-300 font-medium text-gray-700 hover:text-blue-700 border-b-2 border-transparent hover:border-black hover:no-underline;
+            }
+
+            .btn {
+                @apply focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none;
+            }
+
+            .btn-primary {
+                @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300;
+            }
+
+            .btn-secondary {
+                @apply text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100;
+            }
+
+            .btn-dark {
+                @apply text-white bg-gray-800 hover:bg-gray-900 focus:ring-gray-300;
+            }
+
+            .btn-light {
+                @apply text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-gray-100;
+            }
+
+            .btn-danger {
+                @apply text-white bg-red-700 hover:bg-red-800 focus:ring-red-300;
+            }
+
+            .list-group {
+                @apply w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg;
+            }
+
+            .list-item {
+                @apply w-full px-4 py-2 border-b border-gray-200 rounded-t-lg;
+            }
+
+            .badge {
+                @apply text-xs font-medium me-2 px-2.5 py-0.5 rounded;
+            }
+
+            .badge-blue {
+                @apply bg-blue-100 text-blue-800;
+            }
+
+            .badge-pink {
+                @apply bg-pink-100 text-pink-800;
+            }
+
+            .card {
+                @apply p-6 bg-white border border-gray-200 rounded-lg shadow;
+            }
+
+            .header {
+                @apply flex justify-between items-baseline border-b border-gray-700 pb-1 my-5;
+            }
+
+            .error {
+                @apply text-sm text-red-500 mt-2;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <nav class="flex flex-row justify-between py-3 px-6 border-b">
+        <!-- site name -->
+        <div class="flex gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+            </svg>
+            <span class="text-blue-500 text-xl font-semibold">Ollama phi4</span>
+        </div>
+
+        <!-- nav links -->
+        <div class="flex gap-4">
+            <a role="nav" href="/">Chat</a>
+           
+        </div>
+    </nav>
+
+    <main class="container mx-auto my-5" layout:fragment="content">
+        <p>Page content goes here...</p>
+    </main>
+</body>
+</html>
